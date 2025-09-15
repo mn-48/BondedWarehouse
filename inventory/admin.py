@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Supplier, Category, Product, Warehouse, Stock, StockMovement, HSCode, BondLicense, ImportDeclaration, ExportDeclaration, IOCO
+from .models import Supplier, Category, Product, Warehouse, Stock, StockMovement, HSCode, BondLicense, ImportDeclaration, ExportDeclaration, IOCO, UOM
 
 
 @admin.register(Supplier)
@@ -16,8 +16,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("sku", "name", "category", "supplier", "unit_price", "is_active")
-    list_filter = ("category", "supplier", "is_active")
+    list_display = ("sku", "name", "category", "supplier", "uom", "unit_price", "is_active")
+    list_filter = ("category", "supplier", "uom", "is_active")
     search_fields = ("sku", "name")
 
 
@@ -70,3 +70,9 @@ class ExportDeclarationAdmin(admin.ModelAdmin):
 class IOCOAdmin(admin.ModelAdmin):
     list_display = ("product", "hs_code", "input_quantity", "output_quantity", "effective_date")
     list_filter = ("hs_code",)
+
+
+@admin.register(UOM)
+class UOMAdmin(admin.ModelAdmin):
+    list_display = ("code", "name")
+    search_fields = ("code", "name")

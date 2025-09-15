@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import Supplier, Category, Product, Warehouse, Stock, StockMovement, HSCode, BondLicense, ImportDeclaration, ExportDeclaration, IOCO
+from .models import Supplier, Category, Product, Warehouse, Stock, StockMovement, HSCode, BondLicense, ImportDeclaration, ExportDeclaration, IOCO, UOM
 from .serializers import (
     SupplierSerializer,
     CategorySerializer,
@@ -14,6 +14,7 @@ from .serializers import (
     ImportDeclarationSerializer,
     ExportDeclarationSerializer,
     IOCOSerializer,
+    UOMSerializer,
 )
 from django.shortcuts import render
 
@@ -83,6 +84,11 @@ class ExportDeclarationViewSet(viewsets.ModelViewSet):
 class IOCOViewSet(viewsets.ModelViewSet):
     queryset = IOCO.objects.select_related("product", "hs_code").all()
     serializer_class = IOCOSerializer
+
+
+class UOMViewSet(viewsets.ModelViewSet):
+    queryset = UOM.objects.all().order_by("code")
+    serializer_class = UOMSerializer
 
 
 def dashboard(request):

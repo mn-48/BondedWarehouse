@@ -12,6 +12,7 @@ from .views import (
     ImportDeclarationViewSet,
     ExportDeclarationViewSet,
     IOCOViewSet,
+    UOMViewSet,
 )
 
 
@@ -27,6 +28,7 @@ router.register(r'bond-licenses', BondLicenseViewSet)
 router.register(r'import-declarations', ImportDeclarationViewSet)
 router.register(r'export-declarations', ExportDeclarationViewSet)
 router.register(r'ioco', IOCOViewSet)
+router.register(r'uom', UOMViewSet)
 
 
 urlpatterns = [

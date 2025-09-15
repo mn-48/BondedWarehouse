@@ -23,7 +23,7 @@
       <td class="p-2">{{ p.category.name }}</td>
       <td class="p-2">{{ p.supplier }}</td>
       <td class="p-2">{% if p.hs_code %}{{ p.hs_code.code }}{% else %}{% endif %}</td>
-      <td class="p-2">{{ p.uom }}</td>
+      <td class="p-2">{% if p.uom %}{{ p.uom.code }}{% else %}{% endif %}</td>
       <td class="p-2">{{ p.unit_price }}</td>
     </tr>
     {% empty %}

@@ -140,9 +140,19 @@ class ExportDeclaration(TimeStampedModel):
         return self.export_number
 
 
+# Units of Measure
+class UOM(TimeStampedModel):
+    code = models.CharField(max_length=16, unique=True)
+    name = models.CharField(max_length=64)
+    description = models.CharField(max_length=255, blank=True)
+
+    def __str__(self) -> str:
+        return self.code
+
+
 # Extend Product with NBR fields
 Product.add_to_class('hs_code', models.ForeignKey(HSCode, on_delete=models.PROTECT, null=True, blank=True, related_name='products'))
-Product.add_to_class('uom', models.CharField(max_length=32, default='PCS'))
+Product.add_to_class('uom', models.ForeignKey(UOM, on_delete=models.SET_NULL, null=True, blank=True, related_name='products'))
 Product.add_to_class('country_of_origin', models.CharField(max_length=64, blank=True))
 Product.add_to_class('customs_value', models.DecimalField(max_digits=14, decimal_places=2, null=True, blank=True))
 

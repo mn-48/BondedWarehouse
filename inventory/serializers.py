@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Supplier, Category, Product, Warehouse, Stock, StockMovement, HSCode, BondLicense, ImportDeclaration, ExportDeclaration, IOCO
+from .models import Supplier, Category, Product, Warehouse, Stock, StockMovement, HSCode, BondLicense, ImportDeclaration, ExportDeclaration, IOCO, UOM
 
 
 class SupplierSerializer(serializers.ModelSerializer):
@@ -18,6 +18,7 @@ class ProductSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source="category.name", read_only=True)
     supplier_name = serializers.CharField(source="supplier.name", read_only=True)
     hs_code_code = serializers.CharField(source="hs_code.code", read_only=True)
+    uom_code = serializers.CharField(source="uom.code", read_only=True)
 
     class Meta:
         model = Product
@@ -35,6 +36,7 @@ class ProductSerializer(serializers.ModelSerializer):
             "hs_code",
             "hs_code_code",
             "uom",
+            "uom_code",
             "country_of_origin",
             "customs_value",
             "created_at",
@@ -99,5 +101,11 @@ class ExportDeclarationSerializer(serializers.ModelSerializer):
 class IOCOSerializer(serializers.ModelSerializer):
     class Meta:
         model = IOCO
+        fields = "__all__"
+
+
+class UOMSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UOM
         fields = "__all__"
 
